@@ -1,0 +1,3 @@
+{
+  "/api/actuator/route": "app/api/actuator/route.js"
+}
