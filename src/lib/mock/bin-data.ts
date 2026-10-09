@@ -1,0 +1,48 @@
+import type { BinTelemetry } from "@/types/bin";
+
+export const mockBins: BinTelemetry[] = [
+  {
+    id: "BIN-WET-001",
+    category: "WET",
+    fillPercentage: 42,
+    distanceCm: 24.5,
+    remainingCapacity: 58,
+    status: "NORMAL",
+    sensorHealth: "HEALTHY",
+    communicationStatus: "ONLINE",
+    lastUpdated: "2026-08-15T15:00:00.000Z",
+  },
+  {
+    id: "BIN-DRY-001",
+    category: "DRY",
+    fillPercentage: 78,
+    distanceCm: 12.4,
+    remainingCapacity: 22,
+    status: "NEARLY_FULL",
+    sensorHealth: "HEALTHY",
+    communicationStatus: "ONLINE",
+    lastUpdated: "2026-08-15T15:00:00.000Z",
+  },
+  {
+    id: "BIN-EWASTE-001",
+    category: "E_WASTE_HAZARDOUS",
+    fillPercentage: 18,
+    distanceCm: 31.2,
+    remainingCapacity: 82,
+    status: "NORMAL",
+    sensorHealth: "HEALTHY",
+    communicationStatus: "ONLINE",
+    lastUpdated: "2026-08-15T15:00:00.000Z",
+  },
+  {
+    id: "BIN-SANITARY-001",
+    category: "SANITARY",
+    fillPercentage: 51,
+    distanceCm: 19.8,
+    remainingCapacity: 49,
+    status: "NORMAL",
+    sensorHealth: "HEALTHY",
+    communicationStatus: "ONLINE",
+    lastUpdated: "2026-08-15T15:00:00.000Z",
+  },
+];

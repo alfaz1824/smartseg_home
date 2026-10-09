@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum BinCategory {
+  WET
+  DRY
+  E_WASTE_HAZARDOUS
+  SANITARY
+}
+
+enum BinStatus {
+  NORMAL
+  NEARLY_FULL
+  CRITICAL
+  OFFLINE
+  SENSOR_ERROR
+}
+
+enum SensorHealth {
+  HEALTHY
+  WARNING
+  DISCONNECTED
+  INVALID_READING
+}
+
+enum CommunicationStatus {
+  ONLINE
+  OFFLINE
+}
+
+model Bin {
+  id       String      @id @default(cuid())
+  name     String
+  category BinCategory @unique
+
+  status              BinStatus           @default(NORMAL)
+  sensorHealth        SensorHealth        @default(HEALTHY)
+  communicationStatus CommunicationStatus @default(ONLINE)
+
+  fillPercentage    Float @default(0)
+  distanceCm        Float @default(0)
+  remainingCapacity Float @default(100)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  telemetry BinTelemetry[]
+}
+
+model BinTelemetry {
+  id             String   @id @default(cuid())
+  binId          String
+  fillPercentage Float
+  distanceCm     Float
+  recordedAt     DateTime @default(now())
+
+  bin Bin @relation(fields: [binId], references: [id], onDelete: Cascade)
+
+  @@index([binId, recordedAt])
+}
+
+model ClassificationLog {
+  id               String   @id @default(cuid())
+  predictedClass   String
+  confidence       Float
+  wasteCategory    String
+  destinationBin   String
+  processingTimeMs Int
+  createdAt        DateTime @default(now())
+
+  @@index([createdAt])
+}
